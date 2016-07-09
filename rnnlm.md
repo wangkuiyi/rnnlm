@@ -13,8 +13,8 @@ transcriptions，从而达到更好的识别精确度。
 使用更多训练预料是降低 perplexity 的重要有效方法。所以目前一个很能体现
 计算能力的研究是：
 
-> 用 1T tokens 训练一个 RNNLM，并且比较其与对应的 n-gram LM 的
-> perplexity。
+**用 1T tokens 训练一个 RNNLM，并且比较其与对应的 n-gram LM 的
+  perplexity。**
 
 这个挑战是检验计算能力的一个机会。要实现它，技术上至少有有两个难点：
 
