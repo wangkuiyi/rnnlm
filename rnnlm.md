@@ -82,13 +82,30 @@ mini-batches。
 ---------------------------------
 ```
 
-在做第一个minibatch的时候：GPU 1 用田字格左上部分更新局部模型，GPU 2
-用田字格左下部分更新局部模型。随后两个GPU集思广益，然后开始下一个
-minibatch：GPU 1 用右上部分，GPU 2 用右下部分。
+训练过程
+
+1. 第一个minibatch：
+   1. GPU 1 用田字格左上部分更新局部模型，同时 GPU 2用田字格左下部分更新局部模型，随后
+   1. 两个GPU集思广益，然后开始下一个minibatch
+1. 第二个minibatch：
+   1. GPU 1 用右上部分，同时 GPU 2 用右下部分。
+   1. 两个GPU集思广益，然后开始下一个minibatch
 
 ## Reset Memory at Document Boundary
 
+RNN的训练过程可以用下图表示：
 
+<img src="rnnlm.png" />
+
+针对每一个训练数据串，我们希望y1和x2接近，同时y2和x3接近，以此类推。
+
+这个例子里，最初的“记忆”y1是一个全零的向量；而最后的y3将会在 GPU 1 在下一个minibatch里处理 `a cup <es>`的时候作为 y1。这就要求每个 GPU 记住每个序列的最后的“记忆”，以便在下一个minibatch里初始化记忆。
+
+类似的一个问题是：当`<bs>`出现在一个序列里的时候，GPU 要记得重置记忆。比如下面例子：
+
+<img src="reset-memory" />
+
+因为序列中间出现了一个x2=`<bs>`，我们需要把y1设置为0，表示此前没有记忆。
 
 ## Learning Rate Cut-off
 
