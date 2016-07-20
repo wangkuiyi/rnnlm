@@ -77,16 +77,15 @@ mini-batches。
 假设我们有 N=2 个GPU，每个mini-batch 里有 M=2 个序列，那么我们应该把上
 面数据折叠成 B = N x M = 4 段，每段 A = T/S = 6 个词：
 
-```
-  minibatch 1       minibatch 2
----------------------------------
-| <bs> I    have | a  cup  <es> |  on GPU 1
-| <bs> You  have | a  cup  <es> |
----------------------------------
-| <bs> My   cup  | is red  <es> |  on GPU 2
-| <bs> Your cup  | is blue <es> |
----------------------------------
-```
+
+|  minibatch 1   |  minibatch 2 |           |
+|----------------|--------------|-----------|
+| <bs> I    have | a  cup  <es> |  on GPU 1 |
+| <bs> You  have | a  cup  <es> |           |
+|----------------|--------------|-----------|
+| <bs> My   cup  | is red  <es> |  on GPU 2 |
+| <bs> Your cup  | is blue <es> |           |
+
 
 ## 训练过程
 
