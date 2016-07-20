@@ -17,12 +17,14 @@
 1. 训练 n-gram LM 可以方便地并行化，所以支持很大的训练语料。百度用100T tokens训练。
 1. 训练 RNNLM 很不容易。目前最大规模是Google的工作<sup>[glm](#glm)</sup>。其他工作的规模比Google小得多。具体见下表：
 
-	 |     |Google             | 学校       |
+
+     |指标  |Google             | 学校       |
 	 |-----|-------------------|-----------|
 	 | 语料 |1G tokens          |50M tokens |
 	 | 字典 |800K words         |60K words  |
 	 | 规模 |32 Tesla K40 GPUs  |1~2 GPUs   |
 	 | 时间 |5 to 10 days       |weeks      |
+
 
 ## 挑战
 
