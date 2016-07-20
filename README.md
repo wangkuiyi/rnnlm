@@ -81,10 +81,9 @@ mini-batches。
 |  minibatch 1   |  minibatch 2 |           |
 |----------------|--------------|-----------|
 | <bs> I    have | a  cup  <es> |  on GPU 1 |
-| <bs> You  have | a  cup  <es> |           |
-|----------------|--------------|-----------|
+| <bs> You  have | a  cup  <es> |  on GPU 1 |
 | <bs> My   cup  | is red  <es> |  on GPU 2 |
-| <bs> Your cup  | is blue <es> |           |
+| <bs> Your cup  | is blue <es> |  on GPU 2 |
 
 
 ## 训练过程
