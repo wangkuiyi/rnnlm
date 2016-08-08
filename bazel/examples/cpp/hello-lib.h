@@ -1,0 +1,6 @@
+#ifndef EXAMPLES_CPP_HELLO_LIB_H_
+#define EXAMPLES_CPP_HELLO_LIB_H_
+
+void Hello();
+
+#endif  // EXAMPLES_CPP_HELLO_LIB_H_
