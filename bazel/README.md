@@ -61,6 +61,47 @@ docker run --rm \
 -it ubuntu:14.04 /tmp/hello
 ```
 
+## External Projects
+
+Each directory containing a `WORKSPACE` file is considered a project
+by Bazel.  For example, `https://github.com/tensorflow/serving` is a
+project.  However, this project refers to another Bazel project
+`https://github.com/tensorflow/tensorflow`.  For the former to depend
+itself on the latter:
+
+1. We need to declare the latter in the former's `WORKSPACE` file, and
+1. we need to declare some rules in the latter's BUILD file as
+   *visible* by other projects.
+
+For example, we created `./another_example/hello_world:hello_world`,
+which depends on `./examples/cpp:hello-lib`.  Here
+`./another_example/WORKSPACE` denotes `./another_example` a new Bazel
+project.  We can see that:
+
+1. In `./another_example/WORKSPACE`, we use `local_repository` to
+   declared `./examples` as an *external project*, and
+1. in `./examples/cpp/BUILD`, we use `visibility =
+   ["//visibility:public"],` to denote rule `hello-lib` a public one,
+   so it can be referred to by other projects.
+
+To build `./another_example/hello_world`, run:
+
+```
+docker run --rm \
+-v /Users/yiwang/work/rnnlm:/rnnlm \
+-v /tmp:/tmp \
+-it bazel \
+/bin/bash -c "cd /rnnlm/bazel/another_example && bazel --output_base /tmp build //hello_world:hello_world"
+```
+
+To run the build `hello_world` binary file, run
+
+```
+docker run --rm \
+-v $(pwd)/another_example/bazel-bin/hello_world:/tmp \
+-it ubuntu:14.04 \
+/tmp/hello_world
+```
 
 ## Troubleshooting
 
