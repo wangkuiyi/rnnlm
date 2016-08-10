@@ -26,5 +26,5 @@ WORKDIR /serving/tensorflow
 RUN ./configure
 
 WORKDIR /serving
-bazel build tensorflow_serving/...
+RUN bazel build tensorflow_serving/...
 
